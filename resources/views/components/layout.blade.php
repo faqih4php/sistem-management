@@ -29,6 +29,7 @@
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/amethyst.min.css"> -->
     <!-- END Stylesheets -->
+    {{ $style ?? '' }}
 
     <!-- Load and set color theme + dark mode preference (blocking script to prevent flashing) -->
     <script src="{{ asset('js/setTheme.js') }}"></script>
@@ -660,5 +661,6 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/be_pages_dashboard.min.js') }}"></script>
+    {{ $script ?? ''}}
   </body>
 </html>
