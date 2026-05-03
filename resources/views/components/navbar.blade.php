@@ -64,9 +64,12 @@
                   <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_lock.html">
                     <span class="fs-sm fw-medium">Lock Account</span>
                   </a>
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
-                    <span class="fs-sm fw-medium">Log Out</span>
-                  </a>
+                  <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" onclick="this.closest('form').submit()">
+                      <span class="fs-sm fw-medium">Log Out</span>
+                    </a>
+                  </form>
                 </div>
               </div>
             </div>
