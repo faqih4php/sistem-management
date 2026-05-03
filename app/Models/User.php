@@ -33,9 +33,9 @@ class User extends Authenticatable
     protected $guarded = ['id'];
 
     public function role() {
-        return $this->hasMany(Role::class);
+        return $this->belongsTo(Role::class);
     }
-    
+
     public function project() {
         return $this->belongsToMany(Project::class);
     }
