@@ -4,7 +4,7 @@
             @csrf
             <div class="block block-rounded w-50 mx-auto">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">Form Create Roles</h3>
+                    <h3 class="block-title">Form Create Role</h3>
                 </div>
                 <div class="block-content block-content-full ms-3">
                     <div class="row items-push">
