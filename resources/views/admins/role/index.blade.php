@@ -2,13 +2,14 @@
     <x-slot name="style">
         <link rel="stylesheet" href="{{ asset('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
         <link rel="stylesheet" href="{{ asset('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
+        <link rel="stylesheet"
+            href="{{ asset('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
 
     </x-slot>
     <div class="content">
         <div class="block block-rounded w-75 mx-auto">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Role Table</h3>
+                <h3 class="block-title">User Table</h3>
             </div>
             <div class="block-content block-content-full overflow-x-auto">
                 <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -16,8 +17,8 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">No</th>
-                            <th>Name</th>
-                            <th>Action</th>
+                            <th>Username</th>
+                            <th style="width: 100px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,7 +26,23 @@
                             <tr>
                                 <td class="text-center fs-sm">{{ $loop->iteration }}</td>
                                 <td class="fw-semibold fs-sm">{{ $role->name }}</td>
-                                <td class="fw-semibold fs-sm">{{ $role->name }}</td>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="{{ route('roles.edit', $role->id) }}"
+                                            class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
+                                            title="Edit Client">
+                                            <i class="fa fa-fw fa-pencil-alt"></i>
+                                        </a>
+                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-sm btn-alt-secondary"
+                                                data-bs-toggle="tooltip" title="Remove Client">
+                                                <i class="fa fa-fw fa-times"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
