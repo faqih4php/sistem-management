@@ -106,12 +106,12 @@
                             email: true
                         },
                         password: {
-                            required: true,
+                            required: false,
                             minlength: 6,
                             maxlength: 8
                         },
                         password_confirmation: {
-                            required: true,
+                            required: false,
                             equalTo: '#password'
                         },
                         role: {
