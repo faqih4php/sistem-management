@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('role')->get();
         return view('admins.user.index', compact('users'));
     }
 
@@ -36,6 +36,16 @@ class UserController extends Controller
             'email' => 'required|string|unique:users,email',
             'role' => 'required|exists:roles,id',
             'password' => 'required|string|min:6|max:8|confirmed',
+        ], [
+            'name.required' => 'Username is required',
+            'name.max' => 'Max username is 100 characters',
+            'email.required' => 'Email is required',
+            'email.unique' => 'Email already exists',
+            'role.required' => 'Role is required',
+            'password.required' => 'Password is required',
+            'password.min' => 'Min password is 6 characters',
+            'password.max' => 'Max password is 8 characters',
+            'password.confirmed' => 'Password confirmation does not match'
         ]);
 
         User::create([

@@ -114,14 +114,32 @@
           <div class="content-side">
             <ul class="nav-main">
               <li class="nav-main-item">
-                <a class="nav-main-link active" href="be_pages_dashboard.html">
+                <a class="nav-main-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
                   <i class="nav-main-link-icon si si-home"></i>
                   <span class="nav-main-link-name">Dashboard</span>
                 </a>
               </li>
+              <li class="nav-main-item {{ request()->routeIs('users.*') ? 'open' : '' }}">
+                <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ request()->routeIs('roles.*') ? 'true' : 'false' }}" href="#">
+                  <i class="nav-main-link-icon si si-users"></i>
+                  <span class="nav-main-link-name">Users</span>
+                </a>
+                <ul class="nav-main-submenu">
+                  <li class="nav-main-item">
+                    <a class="nav-main-link {{ request()->routeIs('users.index') ? 'active' : '' }}" href="{{ route('users.index') }}">
+                      <span class="nav-main-link-name">List User</span>
+                    </a>
+                  </li>
+                  <li class="nav-main-item">
+                    <a class="nav-main-link {{ request()->routeIs('users.create') ? 'active' : '' }}" href="{{ route('users.create') }}">
+                      <span class="nav-main-link-name">Create User</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
               <li class="nav-main-item {{ request()->routeIs('roles.*') ? 'open' : '' }}">
                 <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="{{ request()->routeIs('roles.*') ? 'true' : 'false' }}" href="#">
-                  <i class="nav-main-link-icon si si-energy"></i>
+                  <i class="nav-main-link-icon fa fa-clipboard-list"></i>
                   <span class="nav-main-link-name">Roles</span>
                 </a>
                 <ul class="nav-main-submenu">
