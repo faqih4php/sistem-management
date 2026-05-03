@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function index()
+    public function indexLogin()
     {
         return view('auths.login');
+    }
+
+    public function indexRegister()
+    {
+        return view('auths.register');
     }
 
     public function login(Request $request)

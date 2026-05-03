@@ -115,7 +115,7 @@
             <ul class="nav-main">
               <li class="nav-main-item">
                 <a class="nav-main-link active" href="be_pages_dashboard.html">
-                  <i class="nav-main-link-icon si si-speedometer"></i>
+                  <i class="nav-main-link-icon si si-home"></i>
                   <span class="nav-main-link-name">Dashboard</span>
                 </a>
               </li>

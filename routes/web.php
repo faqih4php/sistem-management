@@ -6,10 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 
 Route::group(['controller' => AuthController::class], function () {
-    Route::get('/', 'index')->name('login');
-    Route::get('logout', 'logout')->name('logout');
+    Route::get('/', 'indexLogin')->name('login');
+    Route::get('/register', 'indexRegister')->name('register');
+    Route::post('logout', 'logout')->name('logout');
     Route::post('login', 'login')->name('login.post');
-    Route::post('register', 'register')->name('register');
+    Route::post('register', 'register')->name('register.post');
 });
 
 Route::get('/dashboard', function() {
