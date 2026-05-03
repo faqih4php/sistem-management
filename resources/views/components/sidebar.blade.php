@@ -185,7 +185,7 @@
                         <li class="nav-main-item {{ request()->routeIs('projects.*') ? 'open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                                 aria-expanded="{{ request()->routeIs('projects.*') ? 'true' : 'false' }}" href="#">
-                                <i class="nav-main-link-icon si si-users"></i>
+                                <i class="nav-main-link-icon far fa-folder-open"></i>
                                 <span class="nav-main-link-name">Projects</span>
                             </a>
                             <ul class="nav-main-submenu">
@@ -206,7 +206,7 @@
                         <li class="nav-main-item {{ request()->routeIs('tasks.*') ? 'open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
                                 aria-expanded="{{ request()->routeIs('tasks.*') ? 'true' : 'false' }}" href="#">
-                                <i class="nav-main-link-icon si si-users"></i>
+                                <i class="nav-main-link-icon far fa-sticky-note"></i>
                                 <span class="nav-main-link-name">Tasks</span>
                             </a>
                             <ul class="nav-main-submenu">
