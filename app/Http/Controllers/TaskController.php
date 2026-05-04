@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -12,7 +13,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = Task::all();
+        return view('project-managers.task.index', compact('tasks'));
     }
 
     /**
@@ -20,7 +22,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('project-managers.task.create', compact('users'));
     }
 
     /**
@@ -28,7 +33,26 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'start_date'  => 'required|date|before:end_date',
+            'end_date'    => 'required|date|after:start_date',
+            'description' => 'required|string|max:255',
+            'user'        => 'required|array|min:2',
+        ]);
+
+        $task = Task::create([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+            'status'      => $request->status ?? 1,
+        ]);
+
+        $task->user()->sync($request->user);
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task created successfully.');
     }
 
     /**
@@ -44,7 +68,10 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('project-managers.task.edit', compact('task', 'users'));
     }
 
     /**
@@ -52,7 +79,27 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'start_date'  => 'required|date|before:end_date',
+            'end_date'    => 'required|date|after:start_date',
+            'description' => 'required|string|max:255',
+            'status'      => 'required',
+            'user'        => 'required|array|min:2',
+        ]);
+
+        $task->update([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+            'status'      => $request->status,
+        ]);
+
+        $task->user()->sync($request->user);
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task updated successfully.');
     }
 
     /**
