@@ -11,11 +11,11 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">No</th>
-                            <th>Name</th>
+                            <th class="w-20">Name</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Description</th>
-                            <th>Status</th>
+                            <th style="width: 50px;">Status</th>
                             <th style="width: 100px;">Action</th>
                         </tr>
                     </thead>
@@ -27,7 +27,13 @@
                                 <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($task->start_date)) }}</td>
                                 <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($task->end_date)) }}</td>
                                 <td class="fw-semibold fs-sm">
-                                    {{ $task->description }}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        {{ Str::limit($task->description, 15, '...') }}
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-alt-info" data-bs-toggle="modal"
+                                            data-bs-target="#modal-description-{{ $task->id }}" title="See Description">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </div>
                                 </td>
                                 <td>
                                     @if ($task->status == 'pending')
@@ -54,6 +60,10 @@
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
                                         </form>
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-alt-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#modal-detail-{{ $task->id }}" title="See Detail Task">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -62,6 +72,68 @@
                 </table>
             </div>
         </div>
+
+        {{-- Modals --}}
+        @foreach ($tasks as $task)
+        <div class="modal" id="modal-description-{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="block block-rounded block-transparent mb-0">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Description</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content fs-sm text-white">
+                            <p>{{ ucfirst($task->description) ?? '-' }}</p>
+                        </div>
+                        <div class="block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-detail-{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-small"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="block block-rounded block-transparent mb-0">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Detail User Task</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content fs-sm text-white">
+                            <h6>List User: </h6>
+                            @if($task->user && $task->user->count() > 0)
+                                @foreach ($task->user as $user)
+                                    <p class="ms-2 mb-1">{{ $loop->iteration }}. {{ $user->name }}</p>
+                                @endforeach
+                            @else
+                                <p class="ms-2 mb-1">No users assigned.</p>
+                            @endif
+                        </div>
+                        <div class="block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
     <x-slot name="script">
         <!-- jQuery (required for DataTables plugin) -->

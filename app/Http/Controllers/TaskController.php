@@ -14,7 +14,10 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('project-managers.task.index', compact('tasks'));
+        $users = User::whereHas('role', function($q) {
+            $q->where('name','Member');
+        })->get();
+        return view('project-managers.task.index', compact('tasks', 'users'));
     }
 
     /**
@@ -107,6 +110,11 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $task = Task::findOrFail($task->id);
+        $task->user()->detach();
+        $task->delete();
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task deleted successfully.');
     }
 }
