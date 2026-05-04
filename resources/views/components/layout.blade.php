@@ -23,6 +23,9 @@
     <!-- END Icons -->
 
     <!-- Stylesheets -->
+    <!-- Page JS Plugins CSS (must load before OneUI so OneUI can override) -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
+
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.min.css') }}">
 

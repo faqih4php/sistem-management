@@ -56,27 +56,27 @@
                         <i class="fa fa-circle text-default"></i>
                     </button>
                     <button class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
-                        data-toggle="theme" data-theme="assets/css/themes/amethyst.min.css">
+                        data-toggle="theme" data-theme="{{ asset('css/themes/amethyst.min.css') }}">
                         <span>Amethyst</span>
                         <i class="fa fa-circle text-amethyst"></i>
                     </button>
                     <button class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
-                        data-toggle="theme" data-theme="assets/css/themes/city.min.css">
+                        data-toggle="theme" data-theme="{{ asset('css/themes/city.min.css') }}">
                         <span>City</span>
                         <i class="fa fa-circle text-city"></i>
                     </button>
                     <button class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
-                        data-toggle="theme" data-theme="assets/css/themes/flat.min.css">
+                        data-toggle="theme" data-theme="{{ asset('css/themes/flat.min.css') }}">
                         <span>Flat</span>
                         <i class="fa fa-circle text-flat"></i>
                     </button>
                     <button class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
-                        data-toggle="theme" data-theme="assets/css/themes/modern.min.css">
+                        data-toggle="theme" data-theme="{{ asset('css/themes/modern.min.css') }}">
                         <span>Modern</span>
                         <i class="fa fa-circle text-modern"></i>
                     </button>
                     <button class="dropdown-item d-flex align-items-center justify-content-between fw-medium"
-                        data-toggle="theme" data-theme="assets/css/themes/smooth.min.css">
+                        data-toggle="theme" data-theme="{{ asset('css/themes/smooth.min.css') }}">
                         <span>Smooth</span>
                         <i class="fa fa-circle text-smooth"></i>
                     </button>
