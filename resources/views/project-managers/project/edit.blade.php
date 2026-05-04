@@ -7,6 +7,7 @@
     <div class="content">
         <form action="{{ route('projects.update', $project->id) }}" method="POST" id="form">
             @csrf
+            @method('PUT')
             <div class="block block-rounded">
                 <div class="block-header block-header-default">
                     <h3 class="block-title">Form Edit Project</h3>
