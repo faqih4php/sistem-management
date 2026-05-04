@@ -81,9 +81,9 @@
                             <div class="mb-4">
                                 <label class="form-label" for="status">Status</label>
                                 <select class="form-select form-control" id="status" name="status">
-                                    <option value="1" {{ $task->status == 1 ? 'selected' : '' }}>Pending</option>
-                                    <option value="2" {{ $task->status == 2 ? 'selected' : '' }}>Progress</option>
-                                    <option value="3" {{ $task->status == 3 ? 'selected' : '' }}>Finished</option>
+                                    <option value="1" {{ $task->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="2" {{ $task->status == 'progress' ? 'selected' : '' }}>Progress</option>
+                                    <option value="3" {{ $task->status == 'finished' ? 'selected' : '' }}>Finished</option>
                                 </select>
                             </div>
                             <div class="row items-push">
