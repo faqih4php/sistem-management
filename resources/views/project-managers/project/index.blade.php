@@ -30,7 +30,7 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         {{ Str::limit($project->description, 15, '...') }}
                                         <a href="" class="btn btn-sm btn-alt-info" data-bs-toggle="modal"
-                                            data-bs-target="#modal-description" title="See Description">
+                                            data-bs-target="#modal-description-{{ $project->id }}" title="See Description">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -63,7 +63,7 @@
                                             </button>
                                         </form>
                                         <a href="" class="btn btn-sm btn-alt-secondary" data-bs-toggle="modal"
-                                            data-bs-target="#modal-detail" title="See Detail Project">
+                                            data-bs-target="#modal-detail-{{ $project->id }}" title="See Detail Project">
                                             <i class="fa fa-eye"></i>
                                         </a>
                                     </div>
@@ -76,8 +76,8 @@
         </div>
 
         {{-- Modals --}}
-
-        <div class="modal" id="modal-description" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal"
+        @foreach ($projects as $project)
+        <div class="modal" id="modal-description-{{ $project->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <div class="modal" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="modal-block-small"
+        <div class="modal" id="modal-detail-{{ $project->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-small"
             aria-hidden="true">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -119,11 +119,14 @@
                         </div>
                         <div class="block-content fs-sm text-white">
                             <h6>Project Manager: </h6>
-                            <h6 class="ms-2">List User: </h6>
-                            @foreach ($users as $user)
-                                <p class="ms-4">{{ $loop->iteration }}. {{ $project->user->contains($user->id) ? $user->name : '' }}
-                                </p>
-                            @endforeach
+                            <h6 class="ms-2 mb-2">List User: </h6>
+                            @if($project->user && $project->user->count() > 0)
+                                @foreach ($project->user as $user)
+                                    <p class="ms-4 mb-1">{{ $loop->iteration }}. {{ $user->name }}</p>
+                                @endforeach
+                            @else
+                                <p class="ms-2 mb-1">No users assigned.</p>
+                            @endif
                         </div>
                         <div class="block-content block-content-full text-end bg-body">
                             <button type="button" class="btn btn-sm btn-alt-secondary me-1"
@@ -133,6 +136,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
         <!-- END Small Block Modal -->
     </div>
     <x-slot name="script">
