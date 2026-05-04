@@ -11,13 +11,12 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 80px;">No</th>
-                            <th>Name</th>
+                            <th class="w-20">Name</th>
                             <th>Start Date</th>
                             <th>End Date</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            {{-- <th>Project Manager</th> --}}
-                            <th style="width: 100px;">Action</th>
+                            <th class="w-15">Description</th>
+                            <th style="width: 50px;">Status</th>
+                            <th style="width: 150px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,33 +27,45 @@
                                 <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($project->start_date)) }}</td>
                                 <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($project->end_date)) }}</td>
                                 <td class="fw-semibold fs-sm">
-                                    {{ $project->description }}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        {{ Str::limit($project->description, 15, '...') }}
+                                        <a href="" class="btn btn-sm btn-alt-info" data-bs-toggle="modal"
+                                            data-bs-target="#modal-description" title="See Description">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </div>
                                 </td>
                                 <td>
                                     @if ($project->status == 'pending')
                                         <span
                                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Pending</span>
                                     @elseif($project->status == 'progress')
-                                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Progress</span>
+                                        <span
+                                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Progress</span>
                                     @else
-                                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Finished</span>
+                                        <span
+                                            class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Finished</span>
                                     @endif
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center ">
                                     <div class="btn-group">
                                         <a href="{{ route('projects.edit', $project->id) }}"
-                                            class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
+                                            class="btn btn-sm btn-alt-secondary me-1" data-bs-toggle="tooltip"
                                             title="Edit Project">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary"
+                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1"
                                                 data-bs-toggle="tooltip" title="Remove Project">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
                                         </form>
+                                        <a href="" class="btn btn-sm btn-alt-secondary" data-bs-toggle="modal"
+                                            data-bs-target="#modal-detail" title="See Detail Project">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -63,6 +74,66 @@
                 </table>
             </div>
         </div>
+
+        {{-- Modals --}}
+
+        <div class="modal" id="modal-description" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="block block-rounded block-transparent mb-0">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Description</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content fs-sm text-white">
+                            <p>{{ ucfirst($project->description) }}</p>
+                        </div>
+                        <div class="block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="modal-block-small"
+            aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="block block-rounded block-transparent mb-0">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Detail User Project</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content fs-sm text-white">
+                            <h6>Project Manager: </h6>
+                            <h6 class="ms-2">List User: </h6>
+                            @foreach ($users as $user)
+                                <p class="ms-4">{{ $loop->iteration }}. {{ $project->user->contains($user->id) ? $user->name : '' }}
+                                </p>
+                            @endforeach
+                        </div>
+                        <div class="block-content block-content-full text-end bg-body">
+                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END Small Block Modal -->
     </div>
     <x-slot name="script">
         <!-- jQuery (required for DataTables plugin) -->

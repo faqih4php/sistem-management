@@ -14,7 +14,10 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('project-managers.project.index', compact('projects'));
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('project-managers.project.index', compact('projects', 'users'));
     }
 
     /**
