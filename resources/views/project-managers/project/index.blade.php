@@ -31,10 +31,10 @@
                                     {{ $project->description }}
                                 </td>
                                 <td>
-                                    @if ($project->status == 1)
+                                    @if ($project->status == 'pending')
                                         <span
                                             class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Pending</span>
-                                    @elseif($project->status == 2)
+                                    @elseif($project->status == 'progress')
                                         <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Progress</span>
                                     @else
                                         <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Finished</span>
