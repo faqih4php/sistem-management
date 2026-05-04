@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -12,7 +13,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        return view('project-managers.project.index', compact('projects'));
     }
 
     /**
@@ -20,7 +22,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('project-managers.project.create', compact('users'));
     }
 
     /**
@@ -28,7 +33,26 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'start_date'  => 'required|date|before:end_date',
+            'end_date'    => 'required|date|after:start_date',
+            'description' => 'required|string|max:255',
+            'user'        => 'required|array|min:2',
+        ]);
+
+        $project = Project::create([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+            'status'      => $request->status ?? 1,
+        ]);
+
+        $project->user()->sync($request->user);
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project created successfully.');
     }
 
     /**
@@ -44,7 +68,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('project-managers.project.edit', compact('project', 'users'));
     }
 
     /**
