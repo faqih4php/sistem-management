@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +13,14 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function projectTasks(Request $request)
+    {
+        $projects = Project::findOrFail($request->id)->get();
+        $users = Auth::user()->whereHas($projects);
+
+        return view('project-managers.task.project', compact('users', 'projects'));
+    }
+
     public function index()
     {
         $tasks = Task::all();
