@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -46,6 +47,7 @@ class ProjectController extends Controller
 
         $project = Project::create([
             'name'        => $request->name,
+            'project_author' => Auth::user()->name,
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
             'description' => $request->description,
@@ -88,7 +90,7 @@ class ProjectController extends Controller
             'end_date'    => 'required|date|after:start_date',
             'description' => 'required|string|max:255',
             'status'      => 'required',
-            'user'        => 'required|array|min:2',
+            'user'        => 'required|array|min:1',
         ]);
 
         $project->update([

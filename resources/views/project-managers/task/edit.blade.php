@@ -21,6 +21,15 @@
                     <div class="row items-push">
                         <div class="col-lg-10 col-xl-10">
                             <div class="mb-4">
+                                <label class="form-label" for="task_author">Task Author</label>
+                                <input type="text" class="form-control @error('task_author') is-invalid @enderror"
+                                    id="task_author" name="task_author" placeholder="Author.."
+                                    value="{{ old('task_author', $task->task_author) }}" readonly>
+                                @error('task_author')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
                                 <label class="form-label" for="name">Task Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" placeholder="Enter a task name.."

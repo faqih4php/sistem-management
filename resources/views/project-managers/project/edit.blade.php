@@ -21,6 +21,15 @@
                     <div class="row items-push">
                         <div class="col-lg-10 col-xl-10">
                             <div class="mb-4">
+                                <label class="form-label" for="project_author">Project Author</label>
+                                <input type="text" class="form-control @error('project_author') is-invalid @enderror"
+                                    id="project_author" name="project_author" placeholder="Author.."
+                                    value="{{ old('project_author', $project->project_author) }}" readonly>
+                                @error('project_author')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-4">
                                 <label class="form-label" for="name">Project Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     id="name" name="name" placeholder="Enter a project name.."
