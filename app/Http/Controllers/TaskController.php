@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -41,11 +42,12 @@ class TaskController extends Controller
             'start_date'  => 'required|date|before:end_date',
             'end_date'    => 'required|date|after:start_date',
             'description' => 'required|string|max:255',
-            'user'        => 'required|array|min:2',
+            'user'        => 'required|array|min:1',
         ]);
 
         $task = Task::create([
             'name'        => $request->name,
+            'task_author' => Auth::user()->name,
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
             'description' => $request->description,

@@ -118,7 +118,7 @@
                             </div>
                         </div>
                         <div class="block-content fs-sm text-white">
-                            <h6>Project Manager: </h6>
+                            <h6>Project Manager: {{ $project->project_author }}</h6>
                             <h6 class="ms-2 mb-2">List User: </h6>
                             @if($project->user && $project->user->count() > 0)
                                 @foreach ($project->user as $user)
