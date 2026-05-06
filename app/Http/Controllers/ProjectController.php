@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +15,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $tasks = Task::all();
         $projects = Project::all();
         $users = User::whereHas('role', function($q) {
             $q->where('name', 'Member');
         })->get();
-        return view('project-managers.project.index', compact('projects', 'users'));
+        return view('project-managers.project.index', compact('projects', 'users', 'tasks'));
     }
 
     /**

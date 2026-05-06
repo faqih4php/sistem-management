@@ -217,8 +217,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link {{ request()->routeIs('tasks.create') ? 'active' : '' }}"
-                                        href="{{ route('tasks.create') }}">
+                                    <a class="nav-main-link {{ request()->routeIs('tasks.project') || request()->routeIs('tasks.create') ? 'active' : '' }}"
+                                        href="{{ route('tasks.project') }}">
                                         <span class="nav-main-link-name">Create Task</span>
                                     </a>
                                 </li>
