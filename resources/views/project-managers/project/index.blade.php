@@ -147,6 +147,10 @@
                 </div>
             </div>
         @endforeach
+
+        @foreach ($tasks as $task)
+            
+        @endforeach
         <!-- END Small Block Modal -->
     </div>
     <x-slot name="script">

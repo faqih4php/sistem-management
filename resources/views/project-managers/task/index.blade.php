@@ -12,8 +12,8 @@
                         <tr>
                             <th class="text-center" style="width: 80px;">No</th>
                             <th class="w-20">Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
+                            <th>Date</th>
+                            <th>From Project</th>
                             <th>Description</th>
                             <th style="width: 50px;">Status</th>
                             <th style="width: 100px;">Action</th>
@@ -24,8 +24,8 @@
                             <tr>
                                 <td class="text-center fs-sm">{{ $loop->iteration }}</td>
                                 <td class="fw-semibold fs-sm">{{ $task->name }}</td>
-                                <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($task->start_date)) }}</td>
-                                <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($task->end_date)) }}</td>
+                                <td class="fw-semibold fs-sm">{{ date('d M Y', strtotime($task->start_date)) . ' - ' . date('d M Y', strtotime($task->end_date)) }}</td>
+                                <td class="fw-semibold fs-sm">{{ $task->project?->name ?? '-' }}</td>
                                 <td class="fw-semibold fs-sm">
                                     <div class="d-flex justify-content-between align-items-center">
                                         {{ Str::limit($task->description, 15, '...') }}

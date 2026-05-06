@@ -7,14 +7,15 @@
     <div class="content">
         <form action="{{ route('tasks.store') }}" method="POST" id="form">
             @csrf
+            <!-- Input tersembunyi (hidden) untuk mengirimkan ID Project secara otomatis -->
             <div class="block block-rounded">
                 <div class="block-header block-header-default">
                     <h3 class="block-title">Form Create Task</h3>
                 </div>
-                @if(session('error'))
-                <div class="alert alert-danger mx-4 mt-3">
-                    {{ session('error') }}
-                </div>
+                @if (session('error'))
+                    <div class="alert alert-danger mx-4 mt-3">
+                        {{ session('error') }}
+                    </div>
                 @endif
                 <div class="block-content block-content-full ms-3">
                     <div class="row items-push">
@@ -25,6 +26,15 @@
                                     id="task_author" name="task_author" placeholder="Author.."
                                     value="{{ old('task_author') }}" readonly>
                                 @error('task_author')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!-- Input tersembunyi (hidden) untuk mengirimkan ID Project secara otomatis -->
+                            <input type="hidden" name="project_id" value="{{ $project ? $project->id : '' }}">
+                            <div class="mb-4">
+                                <label class="form-label" for="project_name">Project Name</label>
+                                <input type="text" class="form-control @error('project_id') is-invalid @enderror" id="project_name" placeholder="Project Name" value="{{ $project ? $project->name : '' }}" readonly>
+                                @error('project_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -45,7 +55,8 @@
                                     is-invalid
                                     @enderror"
                                         id="start_date" name="start_date" placeholder="Start Date" data-alt-input="true"
-                                        data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('start_date') }}">
+                                        data-date-format="Y-m-d" data-alt-format="F j, Y"
+                                        value="{{ old('start_date') }}">
                                     @error('start_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,7 +68,8 @@
                                     is-invalid
                                     @enderror"
                                         id="end_date" name="end_date" placeholder="End Date" data-alt-input="true"
-                                        data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('end_date') }}">
+                                        data-date-format="Y-m-d" data-alt-format="F j, Y"
+                                        value="{{ old('end_date') }}">
                                     @error('end_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -65,9 +77,8 @@
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="description">Description</label>
-                                <textarea
-                                    class="form-control @error('description') is-invalid @enderror"
-                                    id="description" name="description" rows="4" placeholder="Description">{{ old('description') }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                    rows="4" placeholder="Description" value="{{ old('description') }}"></textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -75,7 +86,8 @@
                             <div class="mb-4">
                                 <label class="form-label" for="user[]">Choose Member</label>
                                 <select class="js-select2 form-select form-control @error('user') is-invalid @enderror"
-                                    id="user[]" name="user[]" style="width: 100%;" data-placeholder="Choose at least two.." multiple>
+                                    id="user[]" name="user[]" style="width: 100%;"
+                                    data-placeholder="Choose at least two.." multiple>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                                     @endforeach
