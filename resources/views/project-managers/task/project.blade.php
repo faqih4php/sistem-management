@@ -23,7 +23,7 @@
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="{{ route('tasks.create', ['project_id' => $project->id]) }}"
-                                                class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
+                                                class="btn btn-sm btn-alt-info" data-bs-toggle="tooltip"
                                                 title="Create Task">
                                                 <i class="fa fa-fw fa-plus"></i>
                                             </a>
