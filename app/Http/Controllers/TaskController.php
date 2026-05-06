@@ -137,8 +137,12 @@ class TaskController extends Controller
 
         $task->user()->sync($request->user);
 
-        return redirect()->route('tasks.index')
-            ->with('success', 'Task updated successfully.');
+        if (Auth::user()->role->name == 'Member') {
+            return redirect()->route('tasks.member')->with('success', 'Task updated successfully');
+        } else {
+            return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+        }
+
     }
 
     /**

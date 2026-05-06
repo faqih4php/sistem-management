@@ -45,8 +45,11 @@
                                         class="js-flatpickr form-control @error('start_date')
                                     is-invalid
                                     @enderror"
-                                        id="start_date" name="start_date" placeholder="Start Date" data-alt-input="true"
+                                        id="start_date" placeholder="Start Date" data-alt-input="true"
                                         data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('start_date', $task->start_date) }}" disabled>
+                                    
+                                    <input type="hidden" name="start_date" value="{{ old('start_date', $task->start_date) }}">
+
                                     @error('start_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -57,8 +60,11 @@
                                         class="js-flatpickr form-control @error('end_date')
                                     is-invalid
                                     @enderror"
-                                        id="end_date" name="end_date" placeholder="End Date" data-alt-input="true"
+                                        id="end_date" placeholder="End Date" data-alt-input="true"
                                         data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('end_date', $task->end_date) }}" disabled>
+                                    
+                                    <input type="hidden" name="end_date" value="{{ old('end_date', $task->end_date) }}">
+
                                     @error('end_date')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
