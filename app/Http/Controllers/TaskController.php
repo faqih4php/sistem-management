@@ -22,6 +22,14 @@ class TaskController extends Controller
         return view('users.task.index', compact('tasks'));
     }
 
+    public function editMember(Task $task) {
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+
+        return view('users.task.edit', compact('task', 'users'));
+    }
+
     public function projectTasks(Request $request)
     {
         /** @var \App\Models\User $user */
@@ -72,7 +80,7 @@ class TaskController extends Controller
         $task = Task::create([
             'name'        => $request->name,
             // Memakai getAttribute agar tidak muncul merah di IDE
-            'task_author' => Auth::user()->getAttribute('name'),
+            'task_author' => Auth::user()->name,
             'project_id'  => $request->project_id,
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
