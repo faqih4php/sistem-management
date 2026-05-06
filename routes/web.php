@@ -19,6 +19,7 @@ Route::get('/dashboard', function() {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('tasks/member/{task}', [TaskController::class, 'editMember'])->name('tasks.member.edit');
 Route::get('tasks/member', [TaskController::class, 'indexMember'])->name('tasks.member');
 Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
 Route::resource('projects', ProjectController::class);

@@ -47,7 +47,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('tasks.edit', $task->id) }}"
+                                        <a href="{{ route('tasks.member.edit', $task->id) }}"
                                             class="btn btn-sm btn-alt-secondary me-1" data-bs-toggle="tooltip"
                                             title="Edit task">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
