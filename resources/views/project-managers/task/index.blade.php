@@ -55,7 +55,7 @@
                                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1"
+                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1 btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove task">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>

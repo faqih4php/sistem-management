@@ -25,6 +25,7 @@
     <!-- Stylesheets -->
     <!-- Page JS Plugins CSS (must load before OneUI so OneUI can override) -->
     <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.min.css') }}">
 
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.min.css') }}">
@@ -664,6 +665,71 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/be_pages_dashboard.min.js') }}"></script>
+
+    <!-- SweetAlert2 Plugin -->
+    <script src="{{ asset('js/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+
+    <!-- Auto trigger SweetAlert if there is a session message -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: true
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    title: 'Oops...',
+                    text: "{{ session('error') }}",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('warning'))
+                Swal.fire({
+                    title: 'Warning',
+                    text: "{{ session('warning') }}",
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+
+        // Global Delete Confirmation Script
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cari semua form yang tombol submit-nya memiliki class 'btn-delete'
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const form = this.closest('form');
+
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Data cannot be restored!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, Delete!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
     {{ $script ?? ''}}
   </body>
 </html>

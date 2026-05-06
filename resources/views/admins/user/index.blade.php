@@ -34,7 +34,7 @@
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary"
+                                            <button type="submit" class="btn btn-sm btn-alt-secondary btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove Client">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>

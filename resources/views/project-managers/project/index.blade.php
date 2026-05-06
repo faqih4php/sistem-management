@@ -66,7 +66,7 @@
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1"
+                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1 btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove Project">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
@@ -149,7 +149,7 @@
         @endforeach
 
         @foreach ($tasks as $task)
-            
+
         @endforeach
         <!-- END Small Block Modal -->
     </div>
