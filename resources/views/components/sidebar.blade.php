@@ -225,6 +225,13 @@
                             </ul>
                         </li>
                     @else
+                        <li class="nav-main-item">
+                            <a class="nav-main-link {{ request()->routeIs('tasks.member') ? 'active' : '' }}"
+                                href="{{ route('tasks.member') }}">
+                                <i class="nav-main-link-icon fa fa-list"></i>
+                                <span class="nav-main-link-name">My Tasks</span>
+                            </a>
+                        </li>
                     @endif
                 @endauth
             </ul>

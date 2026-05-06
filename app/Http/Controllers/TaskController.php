@@ -13,6 +13,15 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function indexMember()
+    {
+        $tasks = Task::whereHas('user', function($q) {
+            $q->where('user_id', Auth::user()->id);
+        })->get();
+
+        return view('users.task.index', compact('tasks'));
+    }
+
     public function projectTasks(Request $request)
     {
         /** @var \App\Models\User $user */
