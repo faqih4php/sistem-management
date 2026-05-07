@@ -16,7 +16,7 @@ class TaskController extends Controller
     public function indexMember()
     {
         $tasks = Task::whereHas('user', function($q) {
-            $q->where('user_id', Auth::user()->id);
+            $q->where('users.id', Auth::user()->id);
         })->get();
 
         return view('users.task.index', compact('tasks'));
