@@ -24,5 +24,7 @@ Route::get('tasks/member', [TaskController::class, 'indexMember'])->name('tasks.
 Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
 Route::resource('projects', ProjectController::class);
 Route::resource('tasks', TaskController::class);
+
 Route::resource('roles', RoleController::class);
+
 Route::resource('users', UserController::class);
