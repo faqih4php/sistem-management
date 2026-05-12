@@ -13,6 +13,15 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function indexMember(Project $project)
+    {
+        $projects = Project::whereHas('user', function($q) {
+            $q->where('users.id', Auth::user()->id);
+        })->get();
+
+        return view('users.project.index', compact('projects'));
+    }
+
     public function index()
     {
         $tasks = Task::all();
@@ -67,7 +76,12 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $projects = Project::findOrFail($project->id);
+        $tasks = Task::all();
+        $users = User::whereHas('role', function($q) {
+            $q->where('name', 'Member');
+        })->get();
+        return view('users.project.show', compact('projects', 'tasks', 'users'));
     }
 
     /**
