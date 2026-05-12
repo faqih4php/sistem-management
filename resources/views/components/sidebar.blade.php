@@ -226,6 +226,13 @@
                         </li>
                     @else
                         <li class="nav-main-item">
+                            <a class="nav-main-link {{ request()->routeIs('projects.member') ? 'active' : '' }}"
+                                href="{{ route('projects.member') }}">
+                                <i class="nav-main-link-icon far fa-folder-open"></i>
+                                <span class="nav-main-link-name">My Projects</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
                             <a class="nav-main-link {{ request()->routeIs('tasks.member') ? 'active' : '' }}"
                                 href="{{ route('tasks.member') }}">
                                 <i class="nav-main-link-icon fa fa-list"></i>
