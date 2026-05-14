@@ -1,10 +1,9 @@
 <x-layout>
     <div class="content">
         <div class="col-12">
-            <!-- Contextual Table -->
             <div class="block block-rounded">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">Contextual Table</h3>
+                    <h3 class="block-title">Your All Project</h3>
                 </div>
                 <div class="block-content">
                     <table class="table table-borderless table-vcenter table-hover">

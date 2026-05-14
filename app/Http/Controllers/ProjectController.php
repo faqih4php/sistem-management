@@ -13,13 +13,17 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function indexMember(Project $project)
+    public function indexMember(Project $project, Task $task)
     {
-        $projects = Project::whereHas('user', function($q) {
-            $q->where('users.id', Auth::user()->id);
+        $projects = Project::whereHas('task', function($q) {
+            $q->whereHas('user', function($e) {
+                $e->where('users.id', Auth::user()->id);
+            });
         })->get();
 
-        return view('users.project.index', compact('projects'));
+        $tasks = Auth::user()->task()->whereIn('project_id', $projects->pluck('id'))->get();
+
+        return view('users.project.index', compact('projects', 'tasks'));
     }
 
     public function index()
@@ -76,12 +80,14 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $projects = Project::findOrFail($project->id);
-        $tasks = Task::all();
-        $users = User::whereHas('role', function($q) {
-            $q->where('name', 'Member');
-        })->get();
-        return view('users.project.show', compact('projects', 'tasks', 'users'));
+        $projects = Project::with('task', 'user')->findOrFail($project->id);
+
+        $tasks = Task::whereIn('project_id', $projects->pluck('id'))->get();
+
+        $taskDones = Task::where('status', 'finished')
+        ->whereIn('project_id', $projects->pluck('id'))->get();
+
+        return view('users.project.show', compact('projects', 'tasks', 'taskDones'));
     }
 
     /**

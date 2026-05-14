@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="{{ asset('js/plugins/flatpickr/flatpickr.min.css') }}">
     </x-slot>
     <div class="content">
-        <form action="{{ route('tasks.update', $task->id) }}" method="POST" id="form">
+        <form action="{{ route('tasks.member.update', $task->id) }}" method="POST" id="form">
             @csrf
             @method('PUT')
             <div class="block block-rounded">
@@ -47,7 +47,7 @@
                                     @enderror"
                                         id="start_date" placeholder="Start Date" data-alt-input="true"
                                         data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('start_date', $task->start_date) }}" disabled>
-                                    
+
                                     <input type="hidden" name="start_date" value="{{ old('start_date', $task->start_date) }}">
 
                                     @error('start_date')
@@ -62,7 +62,7 @@
                                     @enderror"
                                         id="end_date" placeholder="End Date" data-alt-input="true"
                                         data-date-format="Y-m-d" data-alt-format="F j, Y" value="{{ old('end_date', $task->end_date) }}" disabled>
-                                    
+
                                     <input type="hidden" name="end_date" value="{{ old('end_date', $task->end_date) }}">
 
                                     @error('end_date')
@@ -89,7 +89,7 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                
+
                                 <!-- Tambahkan hidden input agar data user yang sudah ada tetap terkirim saat submit -->
                                 @foreach ($task->user as $u)
                                     <input type="hidden" name="user[]" value="{{ $u->id }}">
