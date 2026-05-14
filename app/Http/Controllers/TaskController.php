@@ -30,6 +30,29 @@ class TaskController extends Controller
         return view('users.task.edit', compact('task', 'users'));
     }
 
+    public function updateMember(Request $request, Task $task) {
+        $request->validate([
+            'name'        => 'required|string|max:100',
+            'start_date'  => 'required|date|before:end_date',
+            'end_date'    => 'required|date|after:start_date',
+            'description' => 'required|string|max:255',
+            'status'      => 'required',
+            'user'        => 'required|array|min:2',
+        ]);
+
+        $task->update([
+            'name'        => $request->name,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'description' => $request->description,
+            'status'      => $request->status,
+        ]);
+
+        $task->user()->sync($request->user);
+
+        return redirect()->route('tasks.member')->with('success', 'Task updated successfully');
+    }
+
     public function projectTasks(Request $request)
     {
         /** @var \App\Models\User $user */
@@ -137,11 +160,7 @@ class TaskController extends Controller
 
         $task->user()->sync($request->user);
 
-        if (Auth::user()->role->name == 'Member') {
-            return redirect()->route('tasks.member')->with('success', 'Task updated successfully');
-        } else {
-            return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
-        }
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
 
     }
 

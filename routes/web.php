@@ -27,10 +27,10 @@ Route::middleware(['auth', 'role:Admin'])->group(function () {
 Route::middleware(['auth', 'role:Member'])->group(function() {
     Route::get('tasks/member', [TaskController::class, 'indexMember'])->name('tasks.member');
     Route::get('projects/member', [ProjectController::class, 'indexMember'])->name('projects.member');
+    Route::put('tasks/member/{task}', [TaskController::class, 'updateMember'])->name('tasks.member.update');
     Route::get('tasks/member/{task}', [TaskController::class, 'editMember'])->name('tasks.member.edit');
     Route::get('projects/member/{project}', [ProjectController::class, 'show'])->name('projects.show');
 });
-
 
 Route::middleware(['auth', 'role:Project Manager'])->group(function () {
     Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
