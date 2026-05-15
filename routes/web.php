@@ -19,10 +19,21 @@ Route::get('/dashboard', function() {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('tasks/member/{task}', [TaskController::class, 'editMember'])->name('tasks.member.edit');
-Route::get('tasks/member', [TaskController::class, 'indexMember'])->name('tasks.member');
-Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
-Route::resource('projects', ProjectController::class);
-Route::resource('tasks', TaskController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('users', UserController::class);
+Route::middleware(['auth', 'role:Admin'])->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+});
+
+Route::middleware(['auth', 'role:Member'])->group(function() {
+    Route::get('tasks/member', [TaskController::class, 'indexMember'])->name('tasks.member');
+    Route::get('projects/member', [ProjectController::class, 'indexMember'])->name('projects.member');
+    Route::put('tasks/member/{task}', [TaskController::class, 'updateMember'])->name('tasks.member.update');
+    Route::get('tasks/member/{task}', [TaskController::class, 'editMember'])->name('tasks.member.edit');
+    Route::get('projects/member/{project}', [ProjectController::class, 'show'])->name('projects.show');
+});
+
+Route::middleware(['auth', 'role:Project Manager'])->group(function () {
+    Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
+    Route::resource('projects', ProjectController::class)->except('show');
+    Route::resource('tasks', TaskController::class);
+});

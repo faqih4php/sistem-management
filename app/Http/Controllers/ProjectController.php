@@ -13,6 +13,19 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function indexMember(Project $project, Task $task)
+    {
+        $projects = Project::whereHas('task', function($q) {
+            $q->whereHas('user', function($e) {
+                $e->where('users.id', Auth::user()->id);
+            });
+        })->get();
+
+        $tasks = Auth::user()->task()->whereIn('project_id', $projects->pluck('id'))->get();
+
+        return view('users.project.index', compact('projects', 'tasks'));
+    }
+
     public function index()
     {
         $tasks = Task::all();
@@ -67,7 +80,17 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $projects = Project::with('task', 'user')->findOrFail($project->id);
+
+        $tasks = $projects->task;
+
+        $users = $projects->user;
+
+        $taskDones = $projects->task->where('status', 'finished');
+
+        $taskProgress = $projects->task->where('status', 'progress');
+
+        return view('users.project.show', compact('projects', 'tasks', 'taskDones', 'taskProgress', 'users'));
     }
 
     /**
