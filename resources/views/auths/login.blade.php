@@ -22,6 +22,8 @@
     <!-- END Icons -->
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.min.css') }}">
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.min.css') }}">
 
@@ -138,10 +140,16 @@
                       <form class="js-validation-signin" action="{{ route('login.post') }}" method="POST">
                         @csrf
                         <div class="mb-4">
-                          <input type="text" class="form-control form-control-lg form-control-alt py-3" id="name" name="name" placeholder="Username">
+                          <input type="text" class="form-control form-control-lg form-control-alt py-3 @error('name') is-invalid @enderror" id="name" name="name" placeholder="Username" value="{{ old('name') }}">
+                          @error('name')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
                         </div>
                         <div class="mb-4">
-                          <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Password">
+                          <input type="password" class="form-control form-control-lg form-control-alt py-3 @error('password') is-invalid @enderror" id="password" name="password" placeholder="Password">
+                          @error('password')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-4">
                           <div>
@@ -203,5 +211,37 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/op_auth_signin.min.js') }}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: true
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    title: 'Oops...',
+                    text: "{{ session('error') }}",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('warning'))
+                Swal.fire({
+                    title: 'Warning',
+                    text: "{{ session('warning') }}",
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
   </body>
 </html>

@@ -48,19 +48,19 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="{{ route('tasks.edit', $task->id) }}"
-                                            class="btn btn-sm btn-alt-secondary me-1" data-bs-toggle="tooltip"
+                                            class="btn btn-sm btn-alt-warning me-1" data-bs-toggle="tooltip"
                                             title="Edit task">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1 btn-delete"
+                                            <button type="submit" class="btn btn-sm btn-alt-danger me-1 btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove task">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
                                         </form>
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-alt-secondary" data-bs-toggle="modal"
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-alt-info" data-bs-toggle="modal"
                                             data-bs-target="#modal-detail-{{ $task->id }}" title="See Detail Task">
                                             <i class="fa fa-eye"></i>
                                         </a>

@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 
 Route::group(['controller' => AuthController::class], function () {
@@ -15,9 +16,7 @@ Route::group(['controller' => AuthController::class], function () {
     Route::post('register', 'register')->name('register.post');
 });
 
-Route::get('/dashboard', function() {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth', 'role:Admin'])->group(function () {
     Route::resource('roles', RoleController::class);
@@ -32,7 +31,7 @@ Route::middleware(['auth', 'role:Member'])->group(function() {
     Route::get('projects/member/{project}', [ProjectController::class, 'show'])->name('projects.show');
 });
 
-Route::middleware(['auth', 'role:Project Manager'])->group(function () {
+Route::middleware(['auth', 'role:Project Manager, Admin'])->group(function () {
     Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
     Route::resource('projects', ProjectController::class)->except('show');
     Route::resource('tasks', TaskController::class);
