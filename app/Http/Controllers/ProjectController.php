@@ -82,12 +82,15 @@ class ProjectController extends Controller
     {
         $projects = Project::with('task', 'user')->findOrFail($project->id);
 
-        $tasks = Task::whereIn('project_id', $projects->pluck('id'))->get();
+        $tasks = $projects->task;
 
-        $taskDones = Task::where('status', 'finished')
-        ->whereIn('project_id', $projects->pluck('id'))->get();
+        $users = $projects->user;
 
-        return view('users.project.show', compact('projects', 'tasks', 'taskDones'));
+        $taskDones = $projects->task->where('status', 'finished');
+
+        $taskProgress = $projects->task->where('status', 'progress');
+
+        return view('users.project.show', compact('projects', 'tasks', 'taskDones', 'taskProgress', 'users'));
     }
 
     /**
