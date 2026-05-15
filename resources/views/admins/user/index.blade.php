@@ -27,14 +27,14 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="{{ route('users.edit', $user->id) }}"
-                                            class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
+                                            class="btn btn-sm btn-alt-warning" data-bs-toggle="tooltip"
                                             title="Edit Client">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary btn-delete"
+                                            <button type="submit" class="btn btn-sm btn-alt-danger btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove Client">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
