@@ -26,6 +26,15 @@ class ProjectController extends Controller
         return view('users.project.index', compact('projects', 'tasks'));
     }
 
+    public function showTaskProject(Project $project)
+    {
+        $tasks = Task::whereHas('project', function($q) use ($project) {
+            $q->where('project_id', $project->id);
+        })->get();
+
+        return view('project-managers.project.task', compact('tasks'));
+    }
+
     public function index()
     {
         $tasks = Task::all();

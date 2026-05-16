@@ -1,4 +1,9 @@
 <x-layout>
+    <x-slot name="style">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
+    </x-slot>
 
     <div class="content">
         <div class="block block-rounded mx-auto">
@@ -39,7 +44,8 @@
                                 </td>
                                 <td class="fw-semibold fs-sm">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="" class="btn btn-sm btn-alt-info" title="Detail Task">
+                                        <a href="{{ route('show.tasks', $project->id) }}" class="btn btn-sm btn-alt-info"
+                                            title="Detail Task">
                                             <i class="fa fa-folder"></i>
                                         </a>
                                     </div>
@@ -149,7 +155,6 @@
         @endforeach
 
         @foreach ($tasks as $task)
-
         @endforeach
         <!-- END Small Block Modal -->
     </div>
