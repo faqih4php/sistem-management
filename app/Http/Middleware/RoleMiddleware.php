@@ -18,7 +18,7 @@ class RoleMiddleware
     {
         // Pastikan user sudah login
         if (!$request->user() || !$request->user()->role) {
-            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
+            return redirect()->route('login')->with('error', 'Please log in first before starting');
         }
 
         // Ambil nama role user saat ini
@@ -27,7 +27,7 @@ class RoleMiddleware
         // Cek apakah role user ada di dalam daftar roles yang diizinkan
         if (!in_array($userRole, $roles)) {
             // Jika tidak punya akses, tendang ke dashboard dengan pesan error
-            return redirect()->route('dashboard')->with('error', 'Akses ditolak! Anda tidak memiliki izin untuk halaman tersebut.');
+            return redirect()->route('dashboard')->with('error', 'Access denied, you do not have a permission');
         }
 
         return $next($request);

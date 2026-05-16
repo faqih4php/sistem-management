@@ -31,8 +31,9 @@ Route::middleware(['auth', 'role:Member'])->group(function() {
     Route::get('projects/member/{project}', [ProjectController::class, 'show'])->name('projects.show');
 });
 
-Route::middleware(['auth', 'role:Project Manager, Admin'])->group(function () {
+Route::middleware(['auth', 'role:Project Manager,Admin'])->group(function () {
     Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
     Route::resource('projects', ProjectController::class)->except('show');
     Route::resource('tasks', TaskController::class);
+    Route::get('project/taks/detail/{project}', [ProjectController::class, 'showTaskProject'])->name('show.tasks');
 });
