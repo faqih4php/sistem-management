@@ -35,5 +35,6 @@ Route::middleware(['auth', 'role:Project Manager,Admin'])->group(function () {
     Route::get('tasks/projects', [TaskController::class, 'projectTasks'])->name('tasks.project');
     Route::resource('projects', ProjectController::class)->except('show');
     Route::resource('tasks', TaskController::class);
+    
     Route::get('project/taks/detail/{project}', [ProjectController::class, 'showTaskProject'])->name('show.tasks');
 });
