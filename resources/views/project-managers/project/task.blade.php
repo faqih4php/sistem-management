@@ -8,7 +8,7 @@
     <div class="content">
         <div class="block block-rounded mx-auto">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Task Table</h3>
+                <h3 class="block-title">Project Task</h3>
             </div>
             <div class="block-content block-content-full overflow-x-auto">
                 <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -77,69 +77,8 @@
                 </table>
             </div>
         </div>
-
-        {{-- Modals --}}
-        @foreach ($tasks as $task)
-        <div class="modal" id="modal-description-{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="block block-rounded block-transparent mb-0">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Description</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <i class="fa fa-fw fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content fs-sm text-white">
-                            <p>{{ ucfirst($task->description) ?? '-' }}</p>
-                        </div>
-                        <div class="block-content block-content-full text-end bg-body">
-                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
-                                data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal" id="modal-detail-{{ $task->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-block-small"
-            aria-hidden="true">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="block block-rounded block-transparent mb-0">
-                        <div class="block-header block-header-default">
-                            <h3 class="block-title">Detail User Task</h3>
-                            <div class="block-options">
-                                <button type="button" class="btn-block-option" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <i class="fa fa-fw fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-content fs-sm text-white">
-                            <h6>List User: </h6>
-                            @if($task->user && $task->user->count() > 0)
-                                @foreach ($task->user as $user)
-                                    <p class="ms-2 mb-1">{{ $loop->iteration }}. {{ $user->name }}</p>
-                                @endforeach
-                            @else
-                                <p class="ms-2 mb-1">No users assigned.</p>
-                            @endif
-                        </div>
-                        <div class="block-content block-content-full text-end bg-body">
-                            <button type="button" class="btn btn-sm btn-alt-secondary me-1"
-                                data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
     </div>
+
     <x-slot name="script">
         <!-- jQuery (required for DataTables plugin) -->
         <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
