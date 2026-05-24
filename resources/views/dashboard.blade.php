@@ -272,7 +272,7 @@
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <p class="mb-0">
-                        Welcome to the Dashboard Manager {{ ucfirst(auth()->user()->name) }}, anything to check?
+                        Welcome to the Dashboard {{ ucfirst(auth()->user()->name) }}, anything to check?
                     </p>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -281,7 +281,7 @@
             <!-- Quick Overview -->
             <div class="row">
                 <div class="col-6 col-lg-3">
-                    <a class="block block-rounded block-link-shadow text-center" href="be_pages_ecom_orders.html">
+                    <a class="block block-rounded block-link-shadow text-center" href="{{ route('tasks.member') }}">
                         <div class="block-content block-content-full">
                             <div class="fs-2 fw-semibold text-primary">
                                 {{ $taskMember->count() }}</div>
@@ -298,7 +298,7 @@
                     </a>
                 </div>
                 <div class="col-6 col-lg-3">
-                    <a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)">
+                    <a class="block block-rounded block-link-shadow text-center" href="{{ route('projects.member') }}">
                         <div class="block-content block-content-full">
                             <div class="fs-2 fw-semibold text-success">{{ $projectMember->count() }}</div>
                         </div>
@@ -316,11 +316,11 @@
                 <div class="col-6 col-lg-3">
                     <a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)">
                         <div class="block-content block-content-full">
-                            <div class="fs-2 fw-semibold text-dark">109</div>
+                            <div class="fs-2 fw-semibold text-info">{{ auth()->user()->task()->where('status', 'finished')->count() }}</div>
                         </div>
                         <div class="block-content py-2 bg-body-light">
                             <p class="fw-medium fs-sm text-muted mb-0">
-                                Orders Today
+                                Task Done
                             </p>
                         </div>
                     </a>
@@ -328,11 +328,13 @@
                 <div class="col-6 col-lg-3">
                     <a class="block block-rounded block-link-shadow text-center" href="javascript:void(0)">
                         <div class="block-content block-content-full">
-                            <div class="fs-2 fw-semibold text-dark">$8920</div>
+                            <div class="fs-2 fw-semibold text-dark">
+                                <i class="fa fa-user-friends"></i>
+                            </div>
                         </div>
                         <div class="block-content py-2 bg-body-light">
                             <p class="fw-medium fs-sm text-muted mb-0">
-                                Earnings Today
+                                Your Colleagues
                             </p>
                         </div>
                     </a>
