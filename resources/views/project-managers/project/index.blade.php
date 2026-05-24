@@ -1,4 +1,9 @@
 <x-layout>
+    <x-slot name="style">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
+    </x-slot>
 
     <div class="content">
         <div class="block block-rounded mx-auto">
@@ -39,7 +44,8 @@
                                 </td>
                                 <td class="fw-semibold fs-sm">
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="" class="btn btn-sm btn-alt-info" title="Detail Task">
+                                        <a href="{{ route('show.tasks', $project->id) }}" class="btn btn-sm btn-alt-info"
+                                            title="Detail Task">
                                             <i class="fa fa-folder"></i>
                                         </a>
                                     </div>
@@ -59,19 +65,19 @@
                                 <td class="text-center ">
                                     <div class="btn-group">
                                         <a href="{{ route('projects.edit', $project->id) }}"
-                                            class="btn btn-sm btn-alt-secondary me-1" data-bs-toggle="tooltip"
+                                            class="btn btn-sm btn-alt-warning me-1" data-bs-toggle="tooltip"
                                             title="Edit Project">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary me-1 btn-delete"
+                                            <button type="submit" class="btn btn-sm btn-alt-danger me-1 btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove Project">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>
                                         </form>
-                                        <a href="" class="btn btn-sm btn-alt-secondary" data-bs-toggle="modal"
+                                        <a href="" class="btn btn-sm btn-alt-info" data-bs-toggle="modal"
                                             data-bs-target="#modal-detail-{{ $project->id }}"
                                             title="See Detail Project">
                                             <i class="fa fa-eye"></i>
@@ -149,7 +155,6 @@
         @endforeach
 
         @foreach ($tasks as $task)
-
         @endforeach
         <!-- END Small Block Modal -->
     </div>

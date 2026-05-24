@@ -1,4 +1,9 @@
 <x-layout>
+    <x-slot name="style">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">
+    </x-slot>
 
     <div class="content">
         <div class="block block-rounded mx-auto">
@@ -27,14 +32,14 @@
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="{{ route('users.edit', $user->id) }}"
-                                            class="btn btn-sm btn-alt-secondary" data-bs-toggle="tooltip"
+                                            class="btn btn-sm btn-alt-warning me-2" data-bs-toggle="tooltip"
                                             title="Edit Client">
                                             <i class="fa fa-fw fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-alt-secondary btn-delete"
+                                            <button type="submit" class="btn btn-sm btn-alt-danger btn-delete"
                                                 data-bs-toggle="tooltip" title="Remove Client">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </button>

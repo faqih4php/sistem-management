@@ -37,6 +37,8 @@
     <!-- END Icons -->
 
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('js/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.min.css') }}">
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="{{ asset('css/oneui.min.css') }}">
 
@@ -298,6 +300,38 @@
 
     <!-- Page JS Code -->
     <script src="{{ asset('js/pages/op_auth_signup.min.js') }}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('success'))
+                Swal.fire({
+                    title: 'Success!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: true
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    title: 'Oops...',
+                    text: "{{ session('error') }}",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+
+            @if (session('warning'))
+                Swal.fire({
+                    title: 'Warning',
+                    text: "{{ session('warning') }}",
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endif
+        });
+    </script>
 </body>
 
 </html>
