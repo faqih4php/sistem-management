@@ -24,22 +24,17 @@
                 </div>
                 <div class="col-6 col-md-3">
                     <div class="fs-sm fw-semibold text-muted text-uppercase">Task Done</div>
-                    <a class="link-fx fs-3" href="javascript:void(0)">{{ auth()->user()->task()->where('status', 'finished')->count() }}</a>
+                    <a class="link-fx fs-3"
+                        href="javascript:void(0)">{{ auth()->user()->task()->where('status', 'finished')->count() }}</a>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="fs-sm fw-semibold text-muted text-uppercase"></div>
-                    <a class="link-fx fs-3" href="javascript:void(0)">1360</a>
+                    <div class="fs-sm fw-semibold text-muted text-uppercase">Total Projects</div>
+                    <a class="link-fx fs-3" href="javascript:void(0)">{{ $projects->count() }}</a>
                 </div>
                 <div class="col-6 col-md-3">
-                    <div class="fs-sm fw-semibold text-muted text-uppercase mb-2">739 Ratings</div>
-                    <span class="text-warning">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half"></i>
-                    </span>
-                    <span class="fs-sm text-muted">(4.9)</span>
+                    <div class="fs-sm fw-semibold text-muted text-uppercase">Projects Done</div>
+                    <a class="link-fx fs-3"
+                        href="javascript:void(0)">{{ $projects->where('status', 'finished')->count() }}</a>
                 </div>
             </div>
         </div>
@@ -52,153 +47,30 @@
             <div class="col-md-7 col-xl-8">
                 <!-- Updates -->
                 <ul class="timeline timeline-alt py-0">
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-default">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">Facebook</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        just now
+                    @foreach ($projects as $project)
+                        <li class="timeline-event">
+                            <img class="timeline-event-icon bg-default" src="{{ asset('media/photos/download.jpg') }}">
+                            </img>
+                            <div class="timeline-event-block block">
+                                <div class="block-header">
+                                    <h3 class="block-title">{{ $project->name }}</h3>
+                                    <div class="block-options">
+                                        <div class="timeline-event-time block-options-item fs-sm">
+                                            just now
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="block-content">
-                                <p class="fw-semibold mb-2">
-                                    + 290 Page Likes
-                                </p>
-                                <p>
-                                    This is great, keep it up!
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-modern">
-                            <i class="fa fa-briefcase"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">Products</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        4 hrs ago
-                                    </div>
+                                <div class="block-content">
+                                    <p class="fw-semibold mb-2">
+                                        + 290 Page Likes
+                                    </p>
+                                    <p>
+                                        This is great, keep it up!
+                                    </p>
                                 </div>
                             </div>
-                            <div class="block-content block-content-full">
-                                <p class="fw-semibold mb-2">
-                                    3 New Products were added!
-                                </p>
-                                <div class="d-flex">
-                                    <a class="item item-rounded bg-info me-2" href="javascript:void(0)">
-                                        <i class="si si-rocket fa-2x text-white-75"></i>
-                                    </a>
-                                    <a class="item item-rounded bg-amethyst me-2" href="javascript:void(0)">
-                                        <i class="si si-calendar fa-2x text-white-75"></i>
-                                    </a>
-                                    <a class="item item-rounded bg-city me-2" href="javascript:void(0)">
-                                        <i class="si si-speedometer fa-2x text-white-75"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-info">
-                            <i class="fab fa-twitter"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">Twitter</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        12 hrs ago
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content">
-                                <p class="fw-semibold mb-2">
-                                    + 1150 Followers
-                                </p>
-                                <p>
-                                    You’re getting more and more followers, keep it up!
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-smooth">
-                            <i class="fa fa-database"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">Backup</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        1 day ago
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content">
-                                <p class="fw-semibold mb-2">
-                                    Database backup completed!
-                                </p>
-                                <p>
-                                    Download the <a href="javascript:void(0)">latest backup</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-dark">
-                            <i class="fa fa-cog"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">System</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        1 week ago
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content">
-                                <p class="fw-semibold mb-2">
-                                    App updated to v2.02
-                                </p>
-                                <p>
-                                    Check the complete changelog at the <a href="javascript:void(0)">activity
-                                        page</a>.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-event">
-                        <div class="timeline-event-icon bg-modern">
-                            <i class="fa fa-briefcase"></i>
-                        </div>
-                        <div class="timeline-event-block block">
-                            <div class="block-header">
-                                <h3 class="block-title">Products</h3>
-                                <div class="block-options">
-                                    <div class="timeline-event-time block-options-item fs-sm">
-                                        2 months ago
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block-content block-content-full">
-                                <p class="fw-semibold mb-2">
-                                    1 New Product was added!
-                                </p>
-                                <a class="item item-rounded bg-muted" href="javascript:void(0)">
-                                    <i class="si si-wallet fa-2x text-white-75"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
                 <!-- END Updates -->
             </div>
