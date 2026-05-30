@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-xl-6">
-            <div class="block block-rounded h-100 mb-0">
+            <div class="block block-rounded h-100 mb-0 pb-4">
                 <div class="block-header block-header-default">
                     <h3 class="block-title">Project Task</h3>
                 </div>
