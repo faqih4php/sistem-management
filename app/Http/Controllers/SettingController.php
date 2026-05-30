@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -14,7 +16,12 @@ class SettingController extends Controller
     {
         $users = auth()->user()->findOrFail($id);
         $tasks = Task::all();
-        return view('settings.index', compact('users', 'tasks'));
+        $projects = Project::whereHas('task', function($q) {
+            $q->whereHas('user', function($e) {
+                $e->where('users.id', Auth::user()->id);
+            });
+        })->get();
+        return view('settings.index', compact('users', 'tasks', 'projects'));
     }
 
     /**
