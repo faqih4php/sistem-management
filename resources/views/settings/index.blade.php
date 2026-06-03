@@ -407,7 +407,6 @@
                     </div>
                 </div>
                 <!-- END Ratings -->
-
                 <!-- Followers -->
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
