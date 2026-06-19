@@ -18,6 +18,7 @@
     <div class="bg-body-extra-light">
         <div class="content content-boxed">
             <div class="row items-push text-center">
+                @if (auth()->user()->role->name == 'Member')
                 <div class="col-6 col-md-3">
                     <div class="fs-sm fw-semibold text-muted text-uppercase">Total Task</div>
                     <a class="link-fx fs-3" href="javascript:void(0)">{{ auth()->user()->task()->count() }}</a>
@@ -27,6 +28,7 @@
                     <a class="link-fx fs-3"
                         href="javascript:void(0)">{{ auth()->user()->task()->where('status', 'finished')->count() }}</a>
                 </div>
+                @endif
                 <div class="col-6 col-md-3">
                     <div class="fs-sm fw-semibold text-muted text-uppercase">Total Projects</div>
                     <a class="link-fx fs-3" href="javascript:void(0)">{{ $projects->count() }}</a>
@@ -56,16 +58,75 @@
                                     <h3 class="block-title">{{ $project->name }}</h3>
                                     <div class="block-options">
                                         <div class="timeline-event-time block-options-item fs-sm">
-                                            just now
+                                            {{ $project->created_at->format('d M Y') }}
                                         </div>
                                     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    
+
                                 </div>
                                 <div class="block-content">
                                     <p class="fw-semibold mb-2">
-                                        + 290 Page Likes
+                                        {{ $project->user('role_id', '3')->count() }} Users in this project.
                                     </p>
                                     <p>
-                                        This is great, keep it up!
+                                        {{ $project->description }}
                                     </p>
                                 </div>
                             </div>
