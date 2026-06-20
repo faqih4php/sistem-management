@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -53,7 +54,8 @@ class SettingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $users = User::findOrFail($id);
+        return view('settings.index', compact('users'));
     }
 
     /**
@@ -61,7 +63,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

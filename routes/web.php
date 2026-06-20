@@ -21,6 +21,8 @@ Route::group(['controller' => AuthController::class], function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/user/profile/{user}', [SettingController::class, 'index'])->name('profiles');
+    Route::get('user/setting/{user}', [SettingController::class, 'edit'])->name('edit-profiles');
+    Route::put('user/setting/edit/{user}', [SettingController::class, 'update'])->name('update-profiles');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware(['auth', 'role:Admin'])->group(function () {

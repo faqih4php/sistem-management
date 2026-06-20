@@ -59,7 +59,7 @@
                     <span class="fs-sm fw-medium">Profile</span>
                     <span class="badge rounded-pill bg-primary ms-2">1</span>
                   </a>
-                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="">
+                  <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('edit-profiles', auth()->user()->id) }}">
                     <span class="fs-sm fw-medium">Settings</span>
                   </a>
                 </div>
